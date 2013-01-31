@@ -10,7 +10,7 @@ Main.module("view", function(M){
     var packageContent = {
         eventListener: eventListener,
         init: function(){
-            M.config.designUrl = "dxPs/home.jpg";
+            M.config.designUrl = "home.png";
 
             this.createDesignEle();
             this.createToolBar();
@@ -30,7 +30,6 @@ Main.module("view", function(M){
             el.style.zIndex = "999";
             el.setAttribute("draggable", "false");
 
-            console.log(M.config.top);
 
             document.body.appendChild(el);
             //document.body.style.opacity = "0.5";
@@ -42,16 +41,11 @@ Main.module("view", function(M){
         //创建工具条
         createToolBar: function(){
             var toolBar = document.createElement("div");
-            toolBar.style.position = "fixed";
-            toolBar.style.bottom = "0";
-            toolBar.style.background = "red";
-            toolBar.style.height = "100px";
-            toolBar.style.width = "100px";
-            toolBar.style.zIndex = "1000";
+            toolBar.className = "dorsyToolbarWrapper";
 
             document.body.appendChild(toolBar);
 
-            toolBar.innerHTML = "<div id='dorsyFix'>固定</div>";
+            toolBar.innerHTML = "<div class='dorsyToolbar'><div id='dorsyFix' class='dorsyIcon' title='固定'></div><div id='dorsyClipT' title='测距' class='dorsyIcon'></div><div id='dorsyScale' title='缩放' class='dorsyIcon'></div><div class='dorsyIcon' id='dorsyOpacity' title='透明度'></div><div id='dorsyLogo'></div></div>";
         },
 
         //固定为背景
@@ -74,6 +68,81 @@ Main.module("view", function(M){
             }
 
             document.body.style.background = "url(" + M.config.designUrl + ") no-repeat " + M.config.left + "px " + (M.config.top) + "px";
+
+            M.util.addClass(document.getElementById("dorsyFix"), "dorsyIconSelected");
+        },
+
+        //解除固定
+        unfixDesign: function(){
+            document.body.style.background = "none";
+            this.createDesignEle();
+            M.util.removeClass(document.getElementById("dorsyFix"), "dorsyIconSelected");
+        },
+
+        toggleFixDesign: function(){
+            if(M.status.isFixed){
+                this.fixDesign();
+            }else{
+                this.unfixDesign();
+            }
+        },
+
+        //创建标尺元素
+        createClipEle: function(x, y){
+            var x0 = x || 0;
+            var y0 = y || 0;
+
+            var el = document.createElement("div");
+            el.className = "dorsyRect";
+            el.style.left = x0 + "px";
+            el.style.top = y0 + "px";
+
+            var info = document.createElement("div");
+            info.className = "dorsyInfo";
+            info.style.left = x0 + "px";
+            info.style.top = y0 + "px";
+
+            document.body.appendChild(el);
+            document.body.appendChild(info);
+
+            var clipNode = {
+                rect: el,
+                info: info
+            };
+
+            M.status.clipNodes.push(clipNode);
+
+            return clipNode;
+        },
+
+        //更新标尺
+        updateClipT: function(el, w, h){
+
+            el.info.innerHTML = "长度: <span class='dorsyInfoNum'>" + w + "</span>px, 高度:<span class='dorsyInfoNum'>" + h + "</span>px";
+        },
+
+        //标尺元素视觉
+        toggleClipT: function(){
+            if(M.status.isClipT){
+                M.util.addClass(document.getElementById("dorsyClipT"), "dorsyIconSelected");
+                document.body.style.cursor = "crosshair";
+            }else{
+                M.util.removeClass(document.getElementById("dorsyClipT"), "dorsyIconSelected");
+                document.body.style.cursor = "auto";
+
+                this.clearClipT();
+            }
+        },
+
+        //清除所有的标尺信息
+        clearClipT: function(){
+            var els = M.status.clipNodes;
+            for(var i = 0, n = els.length; i < n; i ++){
+                document.body.removeChild(els[i].rect);
+                document.body.removeChild(els[i].info);
+            }
+
+            M.status.clipNodes = [];
         }
 
     };

@@ -20,6 +20,8 @@ var Main = {
     },
 
     init: function(){
+        this.status.clipNodes = [];
+
         this.readConfig();
         this.view.init();
         this.eventBind.init();
@@ -31,6 +33,10 @@ var Main = {
     readConfig: function(){
         this.config.left = parseInt(this.model.read("dorsy_left")) || 0;
         this.config.top = parseInt(this.model.read("dorsy_top")) || 0;
+    },
+
+    //状态属性
+    status: {
     }
 };
 
@@ -112,4 +118,5 @@ window.onload = function(){
                   
     }(); 
     Main.init();
+
 };

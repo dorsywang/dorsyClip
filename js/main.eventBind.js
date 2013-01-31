@@ -42,8 +42,15 @@ Main.module("eventBind", function(M){
                     return e.offsetY ? e.offsetY : e.pageY;
                 }
             }
-            var clickFlag = 0, x0, y0, leftX, leftY;
+
+            var clickFlag = 0, x0, y0, leftX, leftY, isClipT_el;
+
+            //鼠标按下
             bind(window, "mousedown", function(e){
+                if(/dorsyIcon/.test(e.target.className)){
+                    return;
+                }
+
                 clickFlag = 1;
 
                 x0 = e.clientX;
@@ -51,6 +58,12 @@ Main.module("eventBind", function(M){
 
                 leftX = parseInt(M.el.style.left);
                 leftY = parseInt(M.el.style.top);
+
+                //如果标尺被按下，在click的时候创建一个元素
+                if(M.status.isClipT){
+                    isClipT_el = M.view.createClipEle(x0, y0);
+                    e.preventDefault();
+                }
 
 
             });
@@ -61,15 +74,29 @@ Main.module("eventBind", function(M){
 
             bind(document.body, "mousemove", function(e){
                 if(clickFlag){
-                    var x = e.clientX;
-                    var y = e.clientY;
-                    
-                    var dx = x - x0;
-                    var dy = y - y0;
+                        var x = e.clientX;
+                        var y = e.clientY;
+                        
+                        var dx = x - x0;
+                        var dy = y - y0;
 
+                    //如果 标尺被按下 优先级高于移动
+                    if(M.status.isClipT){
+                        isClipT_el.rect.style.width = dx + "px";
+                        isClipT_el.rect.style.height = dy + "px";
+                        M.view.updateClipT(isClipT_el, dx, dy);
+                    }
 
-                    M.el.style.left = leftX + dx + "px";
-                    M.el.style.top = leftY + dy + "px";
+                    if(clickFlag && ! M.status.isFixed && ! M.status.isClipT){
+                        
+
+                        M.el.style.left = leftX + dx + "px";
+                        M.el.style.top = leftY + dy + "px";
+
+                    }
+
+                    //阻止其他监听
+                    e.preventDefault();
                 }
             });
 
@@ -84,11 +111,13 @@ Main.module("eventBind", function(M){
                 //right
                 if(e.keyCode == 39 && ctrlFlag){
                     M.el.style.left = (left + 1) + "px";
+                    e.preventDefault();
                 }
 
                 //left
                 if(e.keyCode == 37 && ctrlFlag){
                     M.el.style.left = (left - 1) + "px";
+                    e.preventDefault();
                 }
 
                 //up
@@ -112,7 +141,13 @@ Main.module("eventBind", function(M){
             });
 
             bind(document.getElementById("dorsyFix"), "click", function(){
-                M.view.fixDesign();
+                M.status.isFixed = M.status.isFixed ? 0 : 1;
+                M.view.toggleFixDesign();
+            });
+
+            bind(document.getElementById("dorsyClipT"), "click", function(){
+                M.status.isClipT = M.status.isClipT ? 0 : 1;
+                M.view.toggleClipT();
             });
 
         }
