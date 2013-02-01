@@ -50,6 +50,21 @@ Main.module("view", function(M){
             toolBar.innerHTML = "<div class='dorsyToolbar'><div id='dorsyFix' class='dorsyIcon' title='固定'></div><div id='dorsyClipT' title='测距' class='dorsyIcon'></div><div id='dorsyScale' title='缩放' class='dorsyIcon'></div><div class='dorsyIcon' id='dorsyOpacity' title='透明度'></div><div id='dorsyLogo' style='width:131px' title='开关'></div></div>";
         },
 
+        //设置body的透明度
+        setBodyOpicy: function(op){
+            /*
+            all = document.getElementsByTagName("*");;
+            for(var i = 0;i < all.length; i ++){
+                all[i].style.opacity = "0.9";
+            }
+            */
+
+            var bodyChildren = document.body.childNodes;
+            for(var i = 0; i < bodyChildren.length; i ++){
+                 bodyChildren[i] && (bodyChildren[i].className && (! /^dorsy/.test(bodyChildren[i].className))) && bodyChildren[i].style && (bodyChildren[i].style.opacity = op);
+            }
+        },
+
         //固定为背景
         fixDesign: function(){
 
@@ -65,10 +80,8 @@ Main.module("view", function(M){
             document.body.removeChild(M.el);
             M.el = null;
 
-            var all = document.getElementsByTagName("*");;
-            for(var i = 0;i < all.length; i ++){
-                all[i].style.opacity = "0.9";
-            }
+            //设置body的透明度
+            this.setBodyOpicy(0.5);
 
             document.body.style.background = "url(" + M.config.designUrl + ") no-repeat " + M.config.left + "px " + (M.config.top) + "px";
 
@@ -78,6 +91,8 @@ Main.module("view", function(M){
         //解除固定
         unfixDesign: function(){
             document.body.style.background = "none";
+            this.setBodyOpicy(1);
+
             this.createDesignEle();
             M.util.removeClass(document.getElementById("dorsyFix"), "dorsyIconSelected");
         },
@@ -157,12 +172,20 @@ Main.module("view", function(M){
                    ! M.status.isFixed && _this.unfixDesign();
                    M.status.isFixed && function(){
                         document.body.style.background = "url(" + M.config.designUrl + ") no-repeat " + M.config.left + "px " + (M.config.top) + "px";
+
+                        //设置body的透明度
+                        _this.setBodyOpicy(0.5);
+
                    }();
                 });
             }else{
                 M.util.animate(el, {width: "78px"}, 600, function(){
                     ! M.status.isFixed && document.body.removeChild(M.el);
                     document.body.style.background = "none";
+
+                        //设置body的透明度
+                        _this.setBodyOpicy(1);
+
                 });
             }
         }
