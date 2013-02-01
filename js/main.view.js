@@ -15,6 +15,8 @@ Main.module("view", function(M){
             this.createDesignEle();
             this.createToolBar();
 
+            M.status.isOpen = 1;
+
         },
 
         //创建视觉稿图片
@@ -45,7 +47,7 @@ Main.module("view", function(M){
 
             document.body.appendChild(toolBar);
 
-            toolBar.innerHTML = "<div class='dorsyToolbar'><div id='dorsyFix' class='dorsyIcon' title='固定'></div><div id='dorsyClipT' title='测距' class='dorsyIcon'></div><div id='dorsyScale' title='缩放' class='dorsyIcon'></div><div class='dorsyIcon' id='dorsyOpacity' title='透明度'></div><div id='dorsyLogo'></div></div>";
+            toolBar.innerHTML = "<div class='dorsyToolbar'><div id='dorsyFix' class='dorsyIcon' title='固定'></div><div id='dorsyClipT' title='测距' class='dorsyIcon'></div><div id='dorsyScale' title='缩放' class='dorsyIcon'></div><div class='dorsyIcon' id='dorsyOpacity' title='透明度'></div><div id='dorsyLogo' style='width:131px' title='开关'></div></div>";
         },
 
         //固定为背景
@@ -61,6 +63,7 @@ Main.module("view", function(M){
             M.model.write("dorsy_top", M.config.top);
 
             document.body.removeChild(M.el);
+            M.el = null;
 
             var all = document.getElementsByTagName("*");;
             for(var i = 0;i < all.length; i ++){
@@ -143,6 +146,25 @@ Main.module("view", function(M){
             }
 
             M.status.clipNodes = [];
+        },
+
+        //开启关闭dorsyClip
+        toggleOpen: function(el){
+            var _this = this;
+
+            if(M.status.isOpen){
+                M.util.animate(el, {width: "131px"}, 600, function(){
+                   ! M.status.isFixed && _this.unfixDesign();
+                   M.status.isFixed && function(){
+                        document.body.style.background = "url(" + M.config.designUrl + ") no-repeat " + M.config.left + "px " + (M.config.top) + "px";
+                   }();
+                });
+            }else{
+                M.util.animate(el, {width: "78px"}, 600, function(){
+                    ! M.status.isFixed && document.body.removeChild(M.el);
+                    document.body.style.background = "none";
+                });
+            }
         }
 
     };

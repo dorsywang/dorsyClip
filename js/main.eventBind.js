@@ -34,6 +34,7 @@ Main.module("eventBind", function(M){
 
     var packageContent = {
         init: function(){
+            var _this = this;
             //d & d
             function offset(e, type){
                 if(type == "x"){
@@ -47,6 +48,8 @@ Main.module("eventBind", function(M){
 
             //鼠标按下
             bind(window, "mousedown", function(e){
+                if(! M.status.isOpen || ! M.el) return;
+
                 if(/dorsyIcon/.test(e.target.className)){
                     return;
                 }
@@ -73,6 +76,8 @@ Main.module("eventBind", function(M){
             });
 
             bind(document.body, "mousemove", function(e){
+                if(! M.status.isOpen || ! M.el) return;
+
                 if(clickFlag){
                         var x = e.clientX;
                         var y = e.clientY;
@@ -102,6 +107,8 @@ Main.module("eventBind", function(M){
 
             var ctrlFlag = 0;
             bind(window, "keydown", function(e){
+                if(! M.status.isOpen || ! M.el) return;
+
                 if(e.keyCode == 17){
                     ctrlFlag = 1;
                 }
@@ -141,13 +148,22 @@ Main.module("eventBind", function(M){
             });
 
             bind(document.getElementById("dorsyFix"), "click", function(){
+                if(! M.status.isOpen) return;
+
                 M.status.isFixed = M.status.isFixed ? 0 : 1;
                 M.view.toggleFixDesign();
             });
 
             bind(document.getElementById("dorsyClipT"), "click", function(){
+                if(! M.status.isOpen) return;
+
                 M.status.isClipT = M.status.isClipT ? 0 : 1;
                 M.view.toggleClipT();
+            });
+
+            bind(document.getElementById("dorsyLogo"), "click", function(){
+                M.status.isOpen = M.status.isOpen ? 0 : 1;
+                M.view.toggleOpen(this);
             });
 
         }
