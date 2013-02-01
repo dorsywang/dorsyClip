@@ -48,7 +48,7 @@ Main.module("eventBind", function(M){
 
             //鼠标按下
             bind(window, "mousedown", function(e){
-                if(! M.status.isOpen || ! M.el) return;
+                if(! M.status.isOpen) return;
 
                 if(/dorsyIcon/.test(e.target.className)){
                     return;
@@ -73,10 +73,12 @@ Main.module("eventBind", function(M){
 
             bind(window, "mouseup", function(){
                 clickFlag = 0;
+
+                M.status.slideDown = 0;
             });
 
             bind(document.body, "mousemove", function(e){
-                if(! M.status.isOpen || ! M.el) return;
+                if(! M.status.isOpen) return;
 
                 if(clickFlag){
                         var x = e.clientX;
@@ -90,6 +92,20 @@ Main.module("eventBind", function(M){
                         isClipT_el.rect.style.width = dx + "px";
                         isClipT_el.rect.style.height = dy + "px";
                         M.view.updateClipT(isClipT_el, dx, dy);
+                    }
+
+                    if(M.status.slideDown){
+
+                        (dorsySlideLeft + dx > 0 && dorsySlideLeft + dx < parseInt(M.util.css(document.getElementById("dorsySlideBar"), "width"))) && function(){
+                            document.getElementById("dorsySlideA").style.left = (dorsySlideLeft + dx) + "px";
+                            var value = (dorsySlideLeft + dx) / parseInt(M.util.css(document.getElementById("dorsySlideBar"), "width"));
+
+                            M.util.Bar.notify(value);
+                            //阻止其他监听
+                            e.preventDefault();
+                        }();
+
+                        return;
                     }
 
                     if(clickFlag && ! M.status.isFixed && ! M.status.isClipT){
@@ -164,6 +180,17 @@ Main.module("eventBind", function(M){
             bind(document.getElementById("dorsyLogo"), "click", function(){
                 M.status.isOpen = M.status.isOpen ? 0 : 1;
                 M.view.toggleOpen(this);
+            });
+
+            bind(document.getElementById("dorsyOpacity"), "click", function(){
+                M.status.isOpacity = M.status.isOpacity ? 0 : 1;
+                M.view.toggleOpacity();
+            });
+
+            var dorsySlideLeft = 0;
+            M.util.addEvent(document.body, "#dorsySlideA", "mousedown", function(e){
+                M.status.slideDown = 1;
+                dorsySlideLeft = parseInt(M.util.css(this, "left"));
             });
 
         }

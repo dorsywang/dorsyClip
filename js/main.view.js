@@ -65,6 +65,38 @@ Main.module("view", function(M){
             }
         },
 
+        //创建滑动bar
+        createSlideBar: function(){
+            var barHtml = "<div id='dorsySlideBar' class='dorsySlideBar' rangeMin='-50' rangeMax='50'><a id='dorsySlideA' draggable='false' href='#'></a><div class='dMsg'></div></div>";
+            var slideBar = document.createElement("div");
+            slideBar.innerHTML = barHtml;
+            slideBar.className = "dorsySlideBarWrapper";
+            M.slideEle = slideBar;
+
+            document.body.appendChild(slideBar);
+
+            var _this = this;
+            M.util.Bar.addObserver(function(value){
+                M.status.opacityValue = value;
+
+                M.status.isFixed && _this.setBodyOpicy(value);
+                ! M.status.isFixed && function(){
+                    M.el.style.opacity = value;
+                }();
+            });
+        },
+
+        //点击透明度
+        toggleOpacity: function(){
+            if(M.status.isOpacity){
+                this.createSlideBar();
+                M.util.addClass(document.getElementById("dorsyOpacity"), "dorsyIconSelected");
+            }else{
+                M.util.removeClass(document.getElementById("dorsyOpacity"), "dorsyIconSelected");
+                document.body.removeChild(M.slideEle);
+            }
+        },
+
         //固定为背景
         fixDesign: function(){
 
@@ -177,6 +209,7 @@ Main.module("view", function(M){
                         _this.setBodyOpicy(0.5);
 
                    }();
+
                 });
             }else{
                 M.util.animate(el, {width: "78px"}, 600, function(){
@@ -185,7 +218,7 @@ Main.module("view", function(M){
 
                         //设置body的透明度
                         _this.setBodyOpicy(1);
-
+                       M.status.isOpacity && ! (M.status.isOpacity = 0) && _this.toggleOpacity();
                 });
             }
         }

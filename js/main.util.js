@@ -30,7 +30,8 @@ Main.module("util", function(M){
                             function check(node){
 
                                 if(flag){
-                                    if(selector.test(node[proName].toLowerCase())){
+                                    if(selector.test(node[proName])){
+
                                         func.call(node, e);
                                         return;
                                     };
@@ -164,7 +165,18 @@ Main.module("util", function(M){
             var computedStyle = getComputedStyle(el);
             return computedStyle.getPropertyValue(property);
         }
-      }
+      },
+      Bar: {//对滑动bar的事件处理对象
+            observer: [],
+            notify: function(value){
+                for(var i = 0;i < this.observer.length;i ++){
+                    this.observer[i](value);
+                }
+            },
+            addObserver: function(func){
+                this.observer.push(func);
+            }
+        }
     };
 
     return packageContent;
