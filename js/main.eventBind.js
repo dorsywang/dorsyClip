@@ -48,7 +48,7 @@ dorsyClip.module("eventBind", function(M){
 
             //鼠标按下
             bind(window, "mousedown", function(e){
-                if(! M.status.isOpen) return;
+                if(! M.status.isOpen && ! M.el) return;
 
                 if(/dorsyIcon/.test(e.target.className)){
                     return;
@@ -123,7 +123,7 @@ dorsyClip.module("eventBind", function(M){
 
             var ctrlFlag = 0;
             bind(window, "keydown", function(e){
-                if(! M.status.isOpen || ! M.el) return;
+                if(! M.status.isOpen) return;
 
                 if(e.keyCode == 17){
                     ctrlFlag = 1;

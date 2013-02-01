@@ -40,6 +40,10 @@ dorsyClip.module("view", function(M){
                 }
             };
 
+            el.onload = function(e){
+                M.config.designUrl = M.config.designUrl || el.src;
+            };
+
 
             document.body.appendChild(el);
             //document.body.style.opacity = "0.5";
@@ -121,7 +125,6 @@ dorsyClip.module("view", function(M){
             M.model.write("dorsy_top", M.config.top);
 
             document.body.removeChild(M.el);
-            M.el = null;
 
             //设置body的透明度
             this.setBodyOpicy(0.5);
