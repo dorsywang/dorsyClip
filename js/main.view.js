@@ -1,4 +1,4 @@
-Main.module("view", function(M){
+dorsyClip.module("view", function(M){
     //事件处理者
     var eventListener = {
 
@@ -10,8 +10,6 @@ Main.module("view", function(M){
     var packageContent = {
         eventListener: eventListener,
         init: function(){
-            M.config.designUrl = "home.png";
-
             this.createDesignEle();
             this.createToolBar();
 
@@ -24,13 +22,23 @@ Main.module("view", function(M){
             document.body.style.position = "relative";
 
             var el = document.createElement("img");
-            el.src = M.config.designUrl;
+            el.src = M.config.designUrl || "home.jpg";
             el.style.position = "absolute";
             el.style.left = M.config.left + "px";
             el.style.top = M.config.top + "px";
             el.style.opacity = "0.5";
             el.style.zIndex = "999";
             el.setAttribute("draggable", "false");
+
+            el.onerror = function(e){
+                if(M.config.designUrl){
+                    throw new Error("视觉图片" + el.src + "没有找到,请检查路径是否正确--dorsyClip");
+                }else if(/home.png/.test(el.src)){
+                    throw new Error("视觉图片" + el.src + "没有找到,请检查路径是否正确--dorsyClip");
+                }else{
+                    el.src = "home.png";
+                }
+            };
 
 
             document.body.appendChild(el);
@@ -74,6 +82,7 @@ Main.module("view", function(M){
             M.slideEle = slideBar;
 
             document.body.appendChild(slideBar);
+            M.util.animate(slideBar, {bottom: "85px"}, 300);
 
             var _this = this;
             M.util.Bar.addObserver(function(value){
@@ -93,7 +102,9 @@ Main.module("view", function(M){
                 M.util.addClass(document.getElementById("dorsyOpacity"), "dorsyIconSelected");
             }else{
                 M.util.removeClass(document.getElementById("dorsyOpacity"), "dorsyIconSelected");
-                document.body.removeChild(M.slideEle);
+                M.util.animate(M.slideEle, {bottom: "68px", opacity: "0"}, 300, function(){
+                    document.body.removeChild(M.slideEle);
+                });
             }
         },
 

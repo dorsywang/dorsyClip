@@ -1,4 +1,4 @@
-Main.module("model", function(M){
+dorsyClip.module("model", function(M){
 
     var packageContent = {
         //写入一个持久的变量

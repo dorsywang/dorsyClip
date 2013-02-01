@@ -1,44 +1,65 @@
-var Main = {
-    config: {},
+(function(){
+    var Main = {
+        config: {},
 
-    Observer: {
-    },
-    module: function(name, func){
-        Main[name] = new func(this);
-    },
+        Observer: {
+        },
+        module: function(name, func){
+            Main[name] = new func(this);
+        },
 
-    addObserver: function(eventName, observer){
-        this.Observer[eventName] = this.Observer[eventName] || [];
-        this.Observer[eventName].push(observer);
-    },
-    
-    fireEvent: function(eventName, data){
-        var actions = this.Observer[eventName];
-        for(var i = 0; i < actions.length; i ++){
-            actions[i].eventListener[eventName](data);
+        addObserver: function(eventName, observer){
+            this.Observer[eventName] = this.Observer[eventName] || [];
+            this.Observer[eventName].push(observer);
+        },
+        
+        fireEvent: function(eventName, data){
+            var actions = this.Observer[eventName];
+            for(var i = 0; i < actions.length; i ++){
+                actions[i].eventListener[eventName](data);
+            }
+        },
+
+        init: function(){
+            this.status.clipNodes = [];
+
+            this.readConfig();
+            this.view.init();
+            this.eventBind.init();
+        },
+
+        setConfig: function(){
+        },
+
+        readConfig: function(){
+            this.config.left = parseInt(this.model.read("dorsy_left")) || 0;
+            this.config.top = parseInt(this.model.read("dorsy_top")) || 0;
+        },
+
+        //状态属性
+        status: {
         }
-    },
+    };
 
-    init: function(){
-        this.status.clipNodes = [];
+    //返回外部接口
+    window.dorsyClip = {
+       module: function(name , func){
+            Main.module(name, func);
+       },
 
-        this.readConfig();
-        this.view.init();
-        this.eventBind.init();
-    },
+       init: function(){
+            Main.init();
+       },
 
-    setConfig: function(){
-    },
+       set: function(pic){
+            Main.config.designUrl = pic;
+       }
 
-    readConfig: function(){
-        this.config.left = parseInt(this.model.read("dorsy_left")) || 0;
-        this.config.top = parseInt(this.model.read("dorsy_top")) || 0;
-    },
+    };
 
-    //状态属性
-    status: {
-    }
-};
+    window.$DC || (window.$DC = window.dorsyClip);
+
+})();
 
 window.onload = function(){
     /**
@@ -117,6 +138,6 @@ window.onload = function(){
         };
                   
     }(); 
-    Main.init();
+    dorsyClip.init();
 
 };

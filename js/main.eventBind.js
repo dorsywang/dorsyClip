@@ -1,4 +1,4 @@
-Main.module("eventBind", function(M){
+dorsyClip.module("eventBind", function(M){
     var bind = (function(){
         var method = "";
 

@@ -1,4 +1,4 @@
-Main.module("util", function(M){
+dorsyClip.module("util", function(M){
     var packageContent = {
         addEvent: function(proxyNode, selector, eventType, func){//为代理节点添加事件监听
                     var proName = "",flag = 0;
@@ -91,7 +91,7 @@ Main.module("util", function(M){
          var everyStep = {}, currStyle = {};
 
          for(var i in endCss){
-           var currValue = parseInt(el.style[i]);
+           var currValue = parseInt(this.css(el, i));
            currStyle[i] = currValue;
 
            everyStep[i] = parseInt(parseInt(endCss[i]) - currValue) / time;
