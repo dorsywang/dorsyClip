@@ -166,6 +166,24 @@ dorsyClip.module("util", function(M){
             return computedStyle.getPropertyValue(property);
         }
       },
+
+      setOpacity: function(el, value){
+        if(window.addEventListener){
+            el.style.opacity = value;
+        }else{
+            el.style.filter = "alpha(opacity=" + (value * 100) + ")";
+
+            function setChild(el){
+                var children = el.childNodes; 
+                for(var j = 0, n = children.length; j < n; j ++){
+                    children[j] && children[j].nodeType == 1 && (children[j].style.filter = "alpha(opacity=" + (value * 100) + ")") || setChild(children[j]);
+                }
+            }
+
+            setChild(el);
+        }
+      },
+
       Bar: {//对滑动bar的事件处理对象
             observer: [],
             notify: function(value){

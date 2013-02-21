@@ -26,7 +26,9 @@ dorsyClip.module("view", function(M){
             el.style.position = "absolute";
             el.style.left = M.config.left + "px";
             el.style.top = M.config.top + "px";
-            el.style.opacity = "0.5";
+            
+            M.util.setOpacity(el, 0.5);
+
             el.style.zIndex = "999";
             el.setAttribute("draggable", "false");
 
@@ -73,7 +75,7 @@ dorsyClip.module("view", function(M){
 
             var bodyChildren = document.body.childNodes;
             for(var i = 0; i < bodyChildren.length; i ++){
-                 bodyChildren[i] && (bodyChildren[i].className && (! /^dorsy/.test(bodyChildren[i].className))) && bodyChildren[i].style && (bodyChildren[i].style.opacity = op);
+                 bodyChildren[i] && (bodyChildren[i].className && (! /^dorsy/.test(bodyChildren[i].className))) && (M.util.setOpacity(bodyChildren[i], op));
             }
         },
 
@@ -94,7 +96,7 @@ dorsyClip.module("view", function(M){
 
                 M.status.isFixed && _this.setBodyOpicy(value);
                 ! M.status.isFixed && function(){
-                    M.el.style.opacity = value;
+                    M.util.setOpacity(M.el, value);
                 }();
             });
         },

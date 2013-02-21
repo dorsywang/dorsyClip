@@ -31,7 +31,6 @@ dorsyClip.module("eventBind", function(M){
         
     })();
 
-
     var packageContent = {
         init: function(){
             var _this = this;
@@ -47,10 +46,11 @@ dorsyClip.module("eventBind", function(M){
             var clickFlag = 0, x0, y0, leftX, leftY, isClipT_el;
 
             //鼠标按下
-            bind(window, "mousedown", function(e){
+            bind(window.document, "mousedown", function(e){
                 if(! M.status.isOpen && ! M.el) return;
 
-                if(/dorsyIcon/.test(e.target.className)){
+                e.target && console.log(e.target.className);
+                if(/dorsyIcon/.test(e.target && e.target.className)){
                     return;
                 }
 
@@ -65,13 +65,15 @@ dorsyClip.module("eventBind", function(M){
                 //如果标尺被按下，在click的时候创建一个元素
                 if(M.status.isClipT){
                     isClipT_el = M.view.createClipEle(x0, y0);
-                    e.preventDefault();
+                    (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
                 }
 
+                (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
+                e.cancelBubble = true;
 
             });
 
-            bind(window, "mouseup", function(){
+            bind(window.document, "mouseup", function(){
                 clickFlag = 0;
 
                 M.status.slideDown = 0;
@@ -102,7 +104,7 @@ dorsyClip.module("eventBind", function(M){
 
                             M.util.Bar.notify(value);
                             //阻止其他监听
-                            e.preventDefault();
+                            (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
                         }();
 
                         return;
@@ -116,13 +118,13 @@ dorsyClip.module("eventBind", function(M){
 
                     }
 
-                    //阻止其他监听
-                    e.preventDefault();
+                    //阻止其他默认监听
+                    (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
                 }
             });
 
             var ctrlFlag = 0;
-            bind(window, "keydown", function(e){
+            bind(window.document, "keydown", function(e){
                 if(! M.status.isOpen) return;
 
                 if(e.keyCode == 17){
@@ -157,7 +159,7 @@ dorsyClip.module("eventBind", function(M){
             });
 
 
-            bind(window, "keyup", function(e){
+            bind(window.document, "keyup", function(e){
                 if(e.keyCode == 17){
                     ctrlFlag = 0;
                 }
