@@ -65,6 +65,7 @@
     position:fixed;
     bottom:68px;
     width:100%;
+    z-index: 10000;
 }
 .dorsySlideBar{
         width:300px;

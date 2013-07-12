@@ -68,6 +68,7 @@ window.onload = function(){
      * @ COPY: sofish, http://sofish.de
      */
 
+    //使用localStorage
     typeof window.localStorage == 'undefined' && ~function(){
 
         var localStorage = window.localStorage = {},
@@ -138,6 +139,25 @@ window.onload = function(){
         };
                   
     }(); 
+
+
+    //使用cookie来存储信息
+    cookieStorage = {
+        getItem: function(key){
+            var cookie = document.cookie;
+
+            var cookieReg = new RegExp("(?:^|;+|\\s+)" + key + "=([^;]*)");
+            var value = cookie.match(cookieReg);
+            
+            return !value ? "" : value[1];
+        },
+
+        setItem: function(key, value){
+            var cookieString = key + "=" + value + ";max-age=" + (60 * 60 * 24 * 356);
+            document.cookie = cookieString;
+        }
+    };
+
     dorsyClip.init();
 
 };

@@ -15,6 +15,9 @@ dorsyClip.module("view", function(M){
 
             M.status.isOpen = 1;
 
+            //设置css
+            M.css.applyStyle();
+
         },
 
         //创建视觉稿图片
