@@ -1,3 +1,9 @@
+/**
+ * @description eventBind file
+ * @author dorsywang(Bin Wang)
+ * @email 314416946@qq.com
+ */
+
 dorsyClip.module("eventBind", function(M){
     var bind = (function(){
         var method = "";
@@ -179,9 +185,11 @@ dorsyClip.module("eventBind", function(M){
                 M.view.toggleClipT();
             });
 
-            bind(document.getElementById("dorsyLogo"), "click", function(){
+            bind(document.getElementById("dorsyLogo"), "click", function(e){
                 M.status.isOpen = M.status.isOpen ? 0 : 1;
-                M.view.toggleOpen(this);
+
+                M.model.write("dorsyIsOpen", M.status.isOpen);
+                M.view.toggleOpen();
             });
 
             bind(document.getElementById("dorsyOpacity"), "click", function(){

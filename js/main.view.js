@@ -1,19 +1,29 @@
+/**
+ * @description view-control file
+ * @author dorsywang(Bin Wang)
+ * @email 314416946@qq.com
+ */
+
 dorsyClip.module("view", function(M){
     //事件处理者
     var eventListener = {
-
-        getBottleSuccess: function(data){
-        }
-
     };
 
     var packageContent = {
         eventListener: eventListener,
         init: function(){
-            this.createDesignEle();
             this.createToolBar();
 
-            M.status.isOpen = 1;
+            M.status.isOpen = parseInt(M.model.read("dorsyIsOpen"));
+
+            var dorsyLogo = document.getElementById("dorsyLogo");
+
+            if(M.status.isOpen){
+                this.createDesignEle();
+                dorsyLogo.style.width = "131px";
+            }else{
+                dorsyLogo.style.width = "78px";
+            }
 
             //设置css
             M.css.applyStyle();
@@ -215,11 +225,12 @@ dorsyClip.module("view", function(M){
         },
 
         //开启关闭dorsyClip
-        toggleOpen: function(el){
+        toggleOpen: function(){
+            var el = document.getElementById("dorsyLogo");
             var _this = this;
 
             if(M.status.isOpen){
-                M.util.animate(el, {width: "131px"}, 600, function(){
+                M.util.animate(el, {width: "131px"}, 400, function(){
                    ! M.status.isFixed && _this.unfixDesign();
                    M.status.isFixed && function(){
                         document.body.style.background = "url(" + M.config.designUrl + ") no-repeat " + M.config.left + "px " + (M.config.top) + "px";
@@ -231,7 +242,7 @@ dorsyClip.module("view", function(M){
 
                 });
             }else{
-                M.util.animate(el, {width: "78px"}, 600, function(){
+                M.util.animate(el, {width: "78px"}, 400, function(){
                     ! M.status.isFixed && document.body.removeChild(M.el);
                     document.body.style.background = "none";
 

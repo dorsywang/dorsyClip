@@ -1,3 +1,9 @@
+/**
+ * @description main file
+ * @author dorsywang(Bin Wang)
+ * @email 314416946@qq.com
+ */
+
 (function(){
     var Main = {
         config: {},

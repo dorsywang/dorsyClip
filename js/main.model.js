@@ -1,3 +1,9 @@
+/**
+ * @description model file
+ * @author dorsywang(Bin Wang)
+ * @email 314416946@qq.com
+ */
+
 dorsyClip.module("model", function(M){
 
     var packageContent = {

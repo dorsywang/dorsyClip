@@ -1,3 +1,10 @@
+/**
+ * @description util file
+ * @author dorsywang(Bin Wang)
+ * @email 314416946@qq.com
+ */
+
+
 dorsyClip.module("util", function(M){
     var packageContent = {
         addEvent: function(proxyNode, selector, eventType, func){//为代理节点添加事件监听
@@ -160,7 +167,7 @@ dorsyClip.module("util", function(M){
       //读取元素的css属性值
       css: function(el, property){
         try{
-            return el.currentStyle[property];
+            return el.currentStyle[property] || el.style[property];
         }catch(e){
             var computedStyle = getComputedStyle(el);
             return computedStyle.getPropertyValue(property);
