@@ -176,9 +176,9 @@ dorsyClip.module("util", function(M){
 
       setOpacity: function(el, value){
         if(window.addEventListener){
-            el.style.opacity = value;
+            el.style && (el.style.opacity = value);
         }else{
-            el.style.filter = "alpha(opacity=" + (value * 100) + ")";
+            el.style && (el.style.filter = "alpha(opacity=" + (value * 100) + ")");
 
             function setChild(el){
                 var children = el.childNodes; 

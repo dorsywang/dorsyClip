@@ -88,7 +88,16 @@ dorsyClip.module("view", function(M){
 
             var bodyChildren = document.body.childNodes;
             for(var i = 0; i < bodyChildren.length; i ++){
-                 bodyChildren[i] && (bodyChildren[i].className && (! /^dorsy/.test(bodyChildren[i].className))) && (M.util.setOpacity(bodyChildren[i], op));
+                 if(bodyChildren[i]){
+                    if(bodyChildren[i].className){
+                        if(/^dorsy/.test(bodyChildren[i].className)){
+                            continue;
+                        }
+                    }else{
+                    }
+
+                    M.util.setOpacity(bodyChildren[i], op);
+                 }
             }
         },
 

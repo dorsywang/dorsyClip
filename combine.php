@@ -4,6 +4,7 @@ $contents = file_get_contents("js/main.js");
 foreach($files as $file){
     if(preg_match("/[^\.]+\.js$/",$file)){
          if($file == "main.js") continue;
+         if($file == "loader.js") continue;
         $contents .= file_get_contents("js/".$file);
     }
 }
