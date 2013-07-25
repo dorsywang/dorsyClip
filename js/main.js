@@ -75,7 +75,7 @@ window.onload = function(){
      */
 
     //使用localStorage
-    typeof window.localStorage == 'undefined' && ~function(){
+    typeof window.localStorage == 'undefined' && function(){
 
         var localStorage = window.localStorage = {},
             prefix = 'data-userdata',

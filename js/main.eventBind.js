@@ -142,25 +142,25 @@ dorsyClip.module("eventBind", function(M){
                 //right
                 if(e.keyCode == 39 && ctrlFlag){
                     M.el.style.left = (left + 1) + "px";
-                    e.preventDefault();
+                    (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
                 }
 
                 //left
                 if(e.keyCode == 37 && ctrlFlag){
                     M.el.style.left = (left - 1) + "px";
-                    e.preventDefault();
+                    (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
                 }
 
                 //up
                 if(e.keyCode == 38 && ctrlFlag){
                     M.el.style.top = (top - 1) + "px";
-                    e.preventDefault();
+                    (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
                 }
 
                 //left
                 if(e.keyCode == 40 && ctrlFlag){
                     M.el.style.top = (top + 1) + "px";
-                    e.preventDefault();
+                    (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
                 }
             });
 

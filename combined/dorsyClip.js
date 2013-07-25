@@ -75,7 +75,7 @@ window.onload = function(){
      */
 
     //使用localStorage
-    typeof window.localStorage == 'undefined' && ~function(){
+    typeof window.localStorage == 'undefined' && function(){
 
         var localStorage = window.localStorage = {},
             prefix = 'data-userdata',
@@ -361,7 +361,7 @@ dorsyClip.module("eventBind", function(M){
             bind(window.document, "mousedown", function(e){
                 if(! M.status.isOpen && ! M.el) return;
 
-                e.target && console.log(e.target.className);
+                //e.target && console.log(e.target.className);
                 if(/dorsyIcon/.test(e.target && e.target.className)){
                     return;
                 }
@@ -448,25 +448,25 @@ dorsyClip.module("eventBind", function(M){
                 //right
                 if(e.keyCode == 39 && ctrlFlag){
                     M.el.style.left = (left + 1) + "px";
-                    e.preventDefault();
+                    (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
                 }
 
                 //left
                 if(e.keyCode == 37 && ctrlFlag){
                     M.el.style.left = (left - 1) + "px";
-                    e.preventDefault();
+                    (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
                 }
 
                 //up
                 if(e.keyCode == 38 && ctrlFlag){
                     M.el.style.top = (top - 1) + "px";
-                    e.preventDefault();
+                    (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
                 }
 
                 //left
                 if(e.keyCode == 40 && ctrlFlag){
                     M.el.style.top = (top + 1) + "px";
-                    e.preventDefault();
+                    (e.preventDefault && e.preventDefault()) || (e.returnValue = false);
                 }
             });
 
@@ -803,6 +803,9 @@ dorsyClip.module("view", function(M){
 
             el.onload = function(e){
                 M.config.designUrl = M.config.designUrl || el.src;
+
+                el.style.width = this.width;
+                el.style.height = this.height;
             };
 
 
@@ -820,7 +823,7 @@ dorsyClip.module("view", function(M){
 
             document.body.appendChild(toolBar);
 
-            toolBar.innerHTML = "<div class='dorsyToolbar'><div id='dorsyFix' class='dorsyIcon' title='固定'></div><div id='dorsyClipT' title='测距' class='dorsyIcon'></div><div id='dorsyScale' title='缩放' class='dorsyIcon'></div><div class='dorsyIcon' id='dorsyOpacity' title='透明度'></div><div id='dorsyLogo' style='width:131px' title='开关'></div></div>";
+            toolBar.innerHTML = "<div class='dorsyToolbar'><div id='dorsyFix' class='dorsyIcon' title='固定'></div><div id='dorsyClipT' title='测距' class='dorsyIcon'></div><div id='dorsyScale' title='缩放 敬请期待' class='dorsyIcon'></div><div class='dorsyIcon' id='dorsyOpacity' title='透明度'></div><div id='dorsyLogo' style='width:131px' title='开关'></div></div>";
         },
 
         //设置body的透明度
@@ -849,7 +852,7 @@ dorsyClip.module("view", function(M){
 
         //创建滑动bar
         createSlideBar: function(){
-            var barHtml = "<div id='dorsySlideBar' class='dorsySlideBar' rangeMin='-50' rangeMax='50'><a id='dorsySlideA' draggable='false' href='#'></a><div class='dMsg'></div></div>";
+            var barHtml = "<div id='dorsySlideBar' class='dorsySlideBar' rangeMin='-50' rangeMax='50'><a id='dorsySlideA' draggable='false' href='javascript:;'></a><div class='dMsg'></div></div>";
             var slideBar = document.createElement("div");
             slideBar.innerHTML = barHtml;
             slideBar.className = "dorsySlideBarWrapper";
@@ -888,8 +891,6 @@ dorsyClip.module("view", function(M){
             //将当前的图片left top 值设置为config值
             M.config.left = parseInt(M.el.style.left);
             M.config.top = parseInt(M.el.style.top);
-
-            console.log("t" + M.config.top);
 
             M.model.write("dorsy_left", M.config.left);
             M.model.write("dorsy_top", M.config.top);

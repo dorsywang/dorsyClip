@@ -57,6 +57,9 @@ dorsyClip.module("view", function(M){
 
             el.onload = function(e){
                 M.config.designUrl = M.config.designUrl || el.src;
+
+                el.style.width = this.width;
+                el.style.height = this.height;
             };
 
 
@@ -103,7 +106,7 @@ dorsyClip.module("view", function(M){
 
         //创建滑动bar
         createSlideBar: function(){
-            var barHtml = "<div id='dorsySlideBar' class='dorsySlideBar' rangeMin='-50' rangeMax='50'><a id='dorsySlideA' draggable='false' href='#'></a><div class='dMsg'></div></div>";
+            var barHtml = "<div id='dorsySlideBar' class='dorsySlideBar' rangeMin='-50' rangeMax='50'><a id='dorsySlideA' draggable='false' href='javascript:;'></a><div class='dMsg'></div></div>";
             var slideBar = document.createElement("div");
             slideBar.innerHTML = barHtml;
             slideBar.className = "dorsySlideBarWrapper";
@@ -142,8 +145,6 @@ dorsyClip.module("view", function(M){
             //将当前的图片left top 值设置为config值
             M.config.left = parseInt(M.el.style.left);
             M.config.top = parseInt(M.el.style.top);
-
-            console.log("t" + M.config.top);
 
             M.model.write("dorsy_left", M.config.left);
             M.model.write("dorsy_top", M.config.top);
