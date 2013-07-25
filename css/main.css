@@ -1,0 +1,162 @@
+html,body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Microsoft Yahei;
+    height: 1500px;
+    background:#f5f5f5;
+    color: #555;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+.wrapper{
+    width: 1004px;
+    margin: 0 auto;
+}
+.header{
+    height:181px;
+    background: url(img/dorsyClip.png) no-repeat 380px 66px;
+    overflow: hidden;
+}
+h2{
+    font-size: 18px;
+    font-weight: normal;
+}
+.header h2{
+    margin-top: 123px;
+    text-align:center;
+}
+
+.spliter{
+    height: 2px;
+}
+.spliterTop{
+    border-bottom: 1px solid #e1e1e1;
+}
+.spliterBottom{
+    border-top: 1px solid #fff;
+}
+
+.intro{
+    font-size: 30px;
+    color: #a1a1a1;
+    font-weight: normal;
+    text-align:center;
+    margin-top: 32px;
+}
+
+.introPic{
+    width: 1003px;
+    margin: 0 auto;
+    padding: 0;
+    margin-top:36px;
+    overflow: auto;
+}
+
+.introPic li{
+    list-style: none;
+    float: left;
+    margin-left: 115px;
+}
+
+.introTitle{
+    width: 164px;
+    height: 155px;
+    background: #884cb9;
+    border-radius: 4px;
+    text-align:center;
+    line-height:155px;
+    color: #fff;
+}
+.introPic li span{
+    position: relative;
+    background:url(img/right.png) no-repeat;
+    width: 115px;
+    height: 112px;
+    display: block;
+    top: -78px;
+    left: 30px;
+}
+#fe{
+    background:#50cb90;
+}
+#pm{
+    background:#1c2cbf;
+}
+
+.guide{
+    width: 900px;
+    margin: 0 auto;
+    overflow: auto;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.guideItem{
+    float: left;
+    width: 200px;
+}
+
+.guidePic{
+    width: 147px;
+    height: 135px;
+    margin: 0 auto;
+    background:url(img/guidePic.png) no-repeat;
+}
+
+#setPic{
+    background-position:-144px 0;
+}
+
+#alterPic{
+    background-position: -288px 0;
+}
+
+.left{
+    float: left;
+}   
+.right{
+    float: right;
+}
+.middle{
+    float: left;
+    margin-left: 183px;
+}
+
+.step{
+    width: 1003px;
+    margin: 0 auto;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+h3{
+    font-size: 18px;
+    font-weight: bold;
+}
+pre{
+    background:#333;;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    font-family: Consolas, Microsoft Yahei;
+}
+
+.links{
+    margin:0 auto;
+    color: #ccc;
+    text-align:center;
+    padding-top: 10px;
+    height: 150px;
+}
+
+.links a{
+    color: #333;
+    text-decoration:none;
+}
+
+.links a:hover{
+    text-decoration:underline;
+}

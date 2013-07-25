@@ -1,79 +1,113 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <link media="all" rel="stylesheet" href="css/main.css" type="text/css" />
+</head>
+<body>
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Dorsyclip : " />
+<div class="wrapper">
+  <div class="header">
+    <h2>致力于简单便捷的Web开发体验</h2>
+  </div>
+</div>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+<div class="spliter">
+  <div class="spliterTop"></div>
+  <div class="spliterBottom"></div>
+</div>
 
-    <title>Dorsyclip</title>
-  </head>
+<h1 class="intro">便捷前端开发的辅助工具(js)</h2>
 
-  <body>
+<ul class="introPic">
+  <li>
+    <div class="introTitle" id="fe">前端开发者</div>
+    <span></span>
+  </li>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/honghu91/dorsyClip">View on GitHub</a>
+  <li>
+    <div class="introTitle">设计师</div>
+    <span></span>
+  </li>
 
-          <h1 id="project_title">Dorsyclip</h1>
-          <h2 id="project_tagline"></h2>
+  <li>
+    <div class="introTitle" id="pm">产品经理</div>
+    <span></span>
+  </li>
+</ul>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/honghu91/dorsyClip/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/honghu91/dorsyClip/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+<div class="spliter">
+  <div class="spliterTop"></div>
+  <div class="spliterBottom"></div>
+</div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<h1 class="intro">How to use?</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<div class="guide">
+  <div class="guideItem left">
+    <div class="guidePic"></div>
+    <div class="guideContext">下载dorsyClip-1.0.js</div>
+  </div>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+  <div class="guideItem middle">
+    <div class="guidePic" id="setPic"></div>
+    <div class="guideContext">引入dorsyClip,设置图片路径</div>
+  </div>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+  <div class="guideItem right">
+    <div class="guidePic" id="alterPic"></div>
+    <div class="guideContext">配合开发者工具制作、调整页面</div>
+  </div>
+  
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+</div>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<div class="spliter">
+  <div class="spliterTop"></div>
+  <div class="spliterBottom"></div>
+</div>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<h1 class="intro">Steps</h1>
+<div class="step">
+  <h3>step1</h3>
+  　　下载并引入dorsyClip
+  <pre>
+    &lt;script type="text/javascript" src="dorsyClip-1.0.js"&gt;&lt;/script&gt;
+  </pre>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+  <h3>step2</h3>
+  　　将视觉稿保存到所在页面根目录，保存为home.png或者home.jpg
+  <br />
+  <br />或者   自行设置视觉稿路径
+  <pre>
+    &lt;script type="text/javascript"&gt;
+      //设置视觉稿的路径，默认为home.jpg或者home.png
+      $DC.set("img/ps.jpg");
+    &lt;/script&gt;
+  </pre>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+  <h3>step3</h3>
+  　　调整视觉稿页面，与页面一致后，点击固定后，按F12调出开发者工具，配合测量工具进行调整
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+  <br />
+  <br />
+  开关：点击dorsyClip Logo
+  <br />
+  Ctrl + 左右(键盘)：进行微调
+</div>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<div class="spliter">
+  <div class="spliterTop"></div>
+  <div class="spliterBottom"></div>
+</div>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
+<h1 class="intro">Links & Other Project</h1>
+<div class="links">
+  <a href="http://alloyteam.github.io/AlloyPhoto/" target="_blank">AlloyImage</a>&nbsp;&nbsp; <a href="https://github.com/honghu91/dorsyClip" target="_blank">dorsyClip On Git</a>&nbsp;&nbsp; <a href="http://www.alloyteam.com" target="_blank">AlloyTeam</a>
+</div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Dorsyclip maintained by <a href="https://github.com/honghu91">honghu91</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+<script type="text/javascript" src="js/dorsyClip-1.0.js"></script>
 
-    
-
-  </body>
+</body>
 </html>
