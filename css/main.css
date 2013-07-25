@@ -7,6 +7,9 @@ html,body{
     background:#f5f5f5;
     color: #555;
 }
+a{
+    text-decoration:none;
+}
 *{
     margin: 0;
     padding: 0;
@@ -97,6 +100,7 @@ h2{
 .guideItem{
     float: left;
     width: 200px;
+    display: block;
 }
 
 .guidePic{
@@ -104,6 +108,12 @@ h2{
     height: 135px;
     margin: 0 auto;
     background:url(img/guidePic.png) no-repeat;
+    display: block;
+}
+
+.guideContext{
+    text-align:center;
+    color: #555;
 }
 
 #setPic{
@@ -117,6 +127,8 @@ h2{
 .left{
     float: left;
 }   
+.left:hover{
+}
 .right{
     float: right;
 }
@@ -159,4 +171,7 @@ pre{
 
 .links a:hover{
     text-decoration:underline;
+}
+.downDc{
+    color: #50cb90;
 }
