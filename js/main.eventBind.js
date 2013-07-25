@@ -55,7 +55,7 @@ dorsyClip.module("eventBind", function(M){
             bind(window.document, "mousedown", function(e){
                 if(! M.status.isOpen && ! M.el) return;
 
-                e.target && console.log(e.target.className);
+                //e.target && console.log(e.target.className);
                 if(/dorsyIcon/.test(e.target && e.target.className)){
                     return;
                 }
