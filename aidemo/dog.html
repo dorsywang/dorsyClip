@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <style type="text/css">
+body{
+  background: #000;
+}
+
+img{
+  width: 400px;
+  height: 400px;
+}
+  </style>
+</head>
+<body>
+
+<img src="img/dog.jpg" id="dog" alt="" />
+<img src="img/border1.jpg" id="border1" alt="" />
+	
+  <script type="text/javascript" src="alloyimage.js"></script>
+  <script type="text/javascript">
+
+    window.onload = function(){
+
+      var dogEl = document.getElementById("dog");
+      var border1El = document.getElementById("border1");
+
+      var layer1 = $AI(dogEl);
+      var layer2 = $AI(border1El);
+
+      layer1.add(layer2, "变暗").show();
+
+    };
+  </script>
+</body>
+</html>
