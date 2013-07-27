@@ -24,12 +24,35 @@ img{
 
     window.onload = function(){
 
-      $AI.useWorker("alloyimage.js");
-
       var dogEl = document.getElementById("dog");
       var border1El = document.getElementById("border1");
 
-      $AI(dogEl).add($AI(border1El), "变暗").ps("carveStyle").show();
+      var layer1 = $AI(dogEl);
+      var layer2 = $AI(border1El);
+
+      var comLayer = layer1.add(layer2, "变暗");
+
+      comLayer.ctx(function(){
+
+        this.font="40px Microsoft Yahei";
+
+        // 创建渐变
+        var gradient = this.createLinearGradient(0, 0, comLayer.canvas.width, 0);
+        gradient.addColorStop("0", "magenta");
+        gradient.addColorStop("0.5", "blue");
+        gradient.addColorStop("1.0", "red");
+
+        // 用渐变填色
+        this.fillStyle = gradient;
+        this.fillText("小狗好可爱", 30, 320);
+          
+      });
+
+      comLayer.clone().ps("sketch").show();
+      comLayer.clone().ps("rough").show();
+      comLayer.clone().ps("lomo").show();
+      comLayer.clone().ps("柔焦").show();
+
     };
   </script>
 </body>
