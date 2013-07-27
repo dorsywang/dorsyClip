@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <style type="text/css">
+body{
+  background: #000;
+}
+
+img{
+  width: 400px;
+  height: 400px;
+}
+  </style>
+</head>
+<body>
+
+<img src="img/dog.jpg" id="dog" alt="" />
+<img src="img/border2.jpg" id="border1" alt="" />
+	
+  <script type="text/javascript" src="alloyimage.js"></script>
+  <script type="text/javascript">
+
+    window.onload = function(){
+
+      $AI.useWorker("alloyimage.js");
+
+      var dogEl = document.getElementById("dog");
+      var border1El = document.getElementById("border1");
+
+      $AI(dogEl).add($AI(border1El), "变暗").ps("carveStyle").show();
+    };
+  </script>
+</body>
+</html>
