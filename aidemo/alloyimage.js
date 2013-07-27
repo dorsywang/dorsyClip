@@ -2115,7 +2115,7 @@ window.AlloyImage = $AI = window.psLib;
                     i, j, k, len;
 
 
-                radius = Math.floor(radius) || 3;
+                radius = Math.floor(radius[0]) || 3;
                 sigma = sigma || radius / 3;
                 
                 a = 1 / (Math.sqrt(2 * Math.PI) * sigma);
